@@ -1,9 +1,58 @@
 
 <?php
 
-@$dataStart = $_GET['data1'];
-echo $dataStart;
+
 include 'includes/ddc.php';
+
+		function affiche($x)
+			{
+				$y = '';
+				if ($x == 'Not Available') {
+					$y = 'style="display : none;"';
+					return $y;
+				} else {
+					$y =  'style="display : block;"';
+					return $y;
+				}
+			};
+
+		function suppStr($x){
+			// Trouver la première occurrence de "%"
+			$result = strstr($x, '%', true);
+			$resultt = strstr($x, '[', true);
+			// Vérifier si le symbole "%" est présent
+			if ($result !== false) {
+				// Afficher la partie de la chaîne avant le symbole "%"
+				return $result;
+			}if ($resultt !== false) {
+				// Afficher la partie de la chaîne avant le symbole "%"
+				return $resultt;
+			} else {
+				// Le symbole "%" n'est pas trouvé
+				return $x;
+			}
+		};
+		function cleanData($tring)
+			{
+				$tring = str_replace("[4]", "", $tring);
+				$tring = str_replace("*", "", $tring);
+				$tring = str_replace("–", "nc", $tring);
+				$tring = str_replace("", "nc", $tring);
+				return $tring;
+				
+			};
+			function minData($x)
+			{
+				if ($x < 1) {
+					$x = 1;
+					return $x*0.5;
+				} else {
+					return $x;
+				}
+			};
+			
+			@$dataStart = cleanData(suppStr($_GET['data1']));
+			echo $dataStart;
 
 /**
  * * Process de mise en cache du csv
@@ -45,12 +94,54 @@ if (file_exists($chemin_fichier_cache) && (time() - filemtime($chemin_fichier_ca
  * * fin Process de mise en cache du csv
  */
 
+/**
+ * ! tempo -> sert à nétoyer et à ré-enregistrer le csv
+ */
 
+// Chemin vers le fichier CSV
+$cheminFichierCSV = 'fichier_cache.csv';
+
+// Ouvrir le fichier en lecture et écriture
+$handle = fopen($cheminFichierCSV, 'r+');
+
+
+// Vérifier si le fichier est ouvert avec succès
+if ($handle !== false) {
+    // Lire le contenu du fichier dans un tableau
+    $contenu = [];
+	while (($data = fgetcsv($handle)) !== false) {
+		for ($n=0; $n < 19; $n++) { 
+			// Effectuer les modifications nécessaires sur chaque ligne
+			$data[$n] = cleanData(suppStr($data[$n]));
+		}
+		$contenu[] = $data;
+	}
+    // Remettre le pointeur du fichier au début
+    fseek($handle, 0);
+
+    // Tronquer le fichier pour effacer le contenu existant
+    ftruncate($handle, 0);
+
+    // Écrire le nouveau contenu dans le fichier
+    foreach ($contenu as $ligne) {
+        fputcsv($handle, $ligne);
+    }
+
+    // Fermer le fichier
+    fclose($handle);
+
+    echo 'Le fichier CSV a été modifié avec succès.';
+} else {
+    echo 'Erreur lors de l\'ouverture du fichier en lecture et écriture.';
+}
+
+/**
+ * ! tempo
+ */
 
 /**
  * * Appel et lecture du csv
  */
-// $chemin_fichier_csv = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQGfGaJSGOe3tGKwHgReahI2NbfPc6zAviwkhrdoN0ytIhPQL9F91NefKf9nmsi_wA833cXaLPo4jDo/pub?gid=0&single=true&output=csv';
 $chemin_fichier_csv = 'fichier_cache.csv';
 // Ouvrir le fichier en mode lecture
 $fichier = fopen($chemin_fichier_csv, 'r');
@@ -66,43 +157,12 @@ if ($fichier !== false) {
 		if ($dataStart == $ligne[0] . ' | ' . $ligne[1]) {
 			// Faire quelque chose avec les valeurs de la ligne
 			// $ligne est un tableau contenant les valeurs des colonnes de la ligne
-			function affiche($x)
-			{
-				$y = '';
-				if ($x == 'Not Available') {
-					$y = 'style="display : none;"';
-					return $y;
-				} else {
-					$y =  'style="display : block;"';
-					return $y;
-				}
-			};
-			function cleanData($tring)
-			{
-				$tring = str_replace("[4]", "", $tring);
-				$tring = str_replace("*", "", $tring);
-				$tring = str_replace("Aubry", "", $tring);
-				$tring = str_replace("Toussaint", "", $tring);
-				$tring = str_replace("Breton", "", $tring);
-				$tring = str_replace("Séjourné", "", $tring);
-				$tring = str_replace("Le Maire", "", $tring);
-				$tring = str_replace("–", "nc", $tring);
-				return $tring;
-			};
-			function minData($x)
-			{
-				if ($x < 1) {
-					$x = 1;
-					return $x;
-				} else {
-					return $x;
-				}
-			};
+			
 			// Exemple : Afficher les valeurs de chaque colonne
 			// echo implode(', ', $ligne) . "<br>";
 			echo '<div id="container" >';
 			for ($i = 3; $i < 19; $i++) {
-				echo '<div ' . affiche($ligne[$i]) . '>';
+				echo '<div ' . $ligne[$i] . '>';
 				echo '<div style="text-align: justify;">' . cleanData($nomsColonnes[$i]) . '</div>';
 				echo '<div class="barrGraph" style="display: flex;">
 					<div class="code_' . cleanData($nomsColonnes[$i]) . ' spaceR" style="width:' . ((minData((int)(cleanData(ddc($ligne[$i]))))) * 10) . 'px;"></div>

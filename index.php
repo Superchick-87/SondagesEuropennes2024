@@ -32,6 +32,11 @@ date_default_timezone_set('Europe/Paris');
 	<form action="">
 		<select class="box" id="choix1" name="choix1" onchange="showCustomer(this.value);">
 			<?php
+
+
+
+
+
 			/**
 			 * * Appel et lecture du csv pour affichage des options dans le select
 			 */
