@@ -2,68 +2,51 @@
 <meta charset="utf-8">
 
 <head>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
 	<script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
-
-
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="https://unpkg.com/pattern.css" rel="stylesheet">
 	<!-- <link href="css/aos.css" rel="stylesheet"> -->
-
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <?php
 setlocale(LC_TIME, "fr_FR.UTF-8");
 date_default_timezone_set('Europe/Paris');
-// $date = date("d-m-Y");
-// $heure = date("H:i");
-// Print("Nous sommes le $date et il est $heure");
-// date_default_timezone_set('UTC');
-// setlocale(LC_TIME, "fr_FR.UTF-8");
-
 ?>
 
-<body>
+<body class='pattern-dots-sm'>
 
-	<h1>Présidentielle 2022, tous les sondages</h1>
+	<h1>Européennes 2024, tous les sondages</h1>
 	<br>
 	<form action="">
 		<select class="box" id="choix1" name="choix1" onchange="showCustomer(this.value);">
 			<?php
-
-
-
-
-
 			/**
 			 * * Appel et lecture du csv pour affichage des options dans le select
 			 */
-			$chemin_fichier_csv = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQGfGaJSGOe3tGKwHgReahI2NbfPc6zAviwkhrdoN0ytIhPQL9F91NefKf9nmsi_wA833cXaLPo4jDo/pub?gid=0&single=true&output=csv';
+			$chemin_fichier_csv = 'fichier_cache.csv';
 			// Ouvrez le fichier en mode lecture
 			$fichier = fopen($chemin_fichier_csv, 'r');
 
-			// Vérifiez si le fichier a pu être ouvert avec succès
-			if ($fichier) {
-				// Parcourez chaque ligne du fichier CSV
-				while (($ligne = fgetcsv($fichier)) !== false) {
-					// Assurez-vous que la ligne a au moins deux colonnes
-					if (count($ligne) >= 2) {
-						// Ajoutez une option au menu déroulant avec les deux premières colonnes
-						echo '<option value="' . htmlspecialchars($ligne[0]) . ' | ' . htmlspecialchars($ligne[1]) . '">' . $ligne[0] . ' | ' . $ligne[1] . '</option>';
-					}
-				}
-				// Fermez le fichier
-				// fclose($fichier);
-				// Affichez le menu déroulant
-				// echo $selectHTML;
-			}
-			// else {
-			// 	// Gestion des erreurs si le fichier ne peut pas être ouvert
-			// 	echo "Erreur lors de l'ouverture du fichier CSV.";
-			// }
+			// Lire le fichier ligne par ligne jusqu'à ce que 'toto' soit trouvé
+			while (($ligne = fgetcsv($fichier)) !== FALSE) {
 
+				if ($ligne[0] != '') {
+					// Vérifier si la ligne contient 'toto'
+					if ((in_array('OpinionWay', $ligne)) && (in_array('13-14 décembre 2023', $ligne))) {
+						// Faire quelque chose lorsque 'toto' est trouvé dans la ligne
+						echo '<option value="' . htmlspecialchars($ligne[0]) . ' | ' . htmlspecialchars($ligne[1]) . '">' . $ligne[0] . ' | ' . $ligne[1] . '</option>';
+						echo "Le mot '13-14 décembre 2023' a été trouvé dans la ligne : " . implode(', ', $ligne);
+						break; // Sortir de la boucle une fois que 'toto' est trouvé
+					}
+					echo '<option value="' . htmlspecialchars($ligne[0]) . ' | ' . htmlspecialchars($ligne[1]) . '">' . $ligne[0] . ' | ' . $ligne[1] . '</option>';
+					// Si 'toto' n'est pas trouvé, continuer à lire les lignes suivantes
+				}
+			}
+			// Fermer le fichier
+			fclose($fichier);
 			?>
 		</select>
 	</form>
@@ -89,7 +72,7 @@ date_default_timezone_set('Europe/Paris');
 			</div>
 		</div>
 	</div>
-	<div id="txtHint" style="display: block;"></div>
+	<div id="txtHint"></div>
 	<br>
 	<hr>
 	<div class="blocparagraphe">
@@ -104,8 +87,6 @@ date_default_timezone_set('Europe/Paris');
 
 <script type="text/javascript">
 	// window.onload = showCustomer();
-
-
 	document.getElementById("choix1").addEventListener("onchange", showCustomer);
 	var data1 = document.getElementById('choix1').value;
 
@@ -128,12 +109,11 @@ date_default_timezone_set('Europe/Paris');
 			}
 			document.getElementById("txtHint").innerHTML = this.responseText;
 			getInnerHTML();
-
 		};
 
 		/* Methode GET -> passe une seule variable */
 		/* Methode POST -> passe plusieurs variables */
-		xhttp.open("GET", "index3.php?data1=" + data1, true);
+		xhttp.open("GET", "done.php?data1=" + data1, true);
 		xhttp.send();
 		// xhttp.open("POST", "index3.php", true);
 		// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -157,21 +137,19 @@ date_default_timezone_set('Europe/Paris');
 
 		for (let i = 0; i < elements.length; i++) {
 			console.log(elements[i].innerHTML);
-			if (elements[i].innerHTML === 'nc') {
+			if (elements[i].innerHTML === 'nc %') {
 				elements2[i - 1].style.width = '0px';
+				elements[i].innerHTML = 'nc';
 			}
 
 		}
-		// // // Parcourez chaque élément et récupérez le contenu HTML interne
-		// elements.forEach(function(element, index) {
-		// 	var innerHTML = element.innerHTML;
+	};
 
-		// 	console.log('InnerHTML de l\'élément ' + (index + 1) + ': ' + innerHTML);
-		// });
-	}
+	// Sélectionner l'élément à ajuster
+	var monElement = document.getElementById('monElement');
 
-	// Appelez la fonction pour récupérer les valeurs au chargement de la page
-	//window.onload = getInnerHTML;
+	// Définir la largeur de l'élément égale à la largeur de l'écran
+	monElement.style.width = window.innerWidth + 'px';
 </script>
 <script src="js/accordeon.js"></script>
 

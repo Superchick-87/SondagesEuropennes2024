@@ -9,6 +9,8 @@
 @import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ultra&display = swap');
 
+@import url("https://use.typekit.net/wtn6rpk.css");
+
 /*  Réinitialisations
 ------------------------------------------------------------------------------------------  */
 * {
@@ -34,7 +36,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Bebas+Neue', serif;
+  font-family: "utopia-std-display", serif;
+  font-weight: 700;
+  font-style: normal;
   color: #2f6ca0;
 }
 
@@ -87,9 +91,26 @@ hr.bloc {
   width: 98%;
 }
 
+/* Fond */
+/* .fond {
+  background: linear-gradient(-30deg, #00f 12.5%, #fff 12.5%, #fff 37.5%, #00f 37.5%, #00f 62.5%, #fff 62.5%, #fff 87.5%, #00f 87.5%);
+  background-size: 100px 58px;
+  background-position: 50px 50px;
+} */
+
+
+
+#txtHint {
+  /* background-color: #dadada7d; */
+  display: block;
+  background-image: url(../images/fond.png);
+  background-repeat: no-repeat;
+  background-position: 80% -70%;
+}
+
 form {
   margin: 0px auto;
-  background-color: #a52a2a38;
+  background-color: #dadadac7;
   margin-top: 10px;
   margin-bottom: 20px;
   padding-top: 20px;
@@ -207,6 +228,10 @@ select option {
   margin-top: 20px;
 }
 
+.spaceTop {
+  margin-top: 10px;
+}
+
 .spaceR {
   margin-right: 7px;
 }
@@ -217,15 +242,15 @@ select option {
 
 /* codes partis */
 .code_LO {
-  background-color: #bb0000;
+  background-color: #780000;
 }
 
 .code_PCF {
-  background-color: #dd0000;
+  background-color: #9B2226;
 }
 
 .code_LFI {
-  background-color: #cc2443;
+  background-color: #C1121F;
 }
 
 .code_PS {
@@ -233,7 +258,7 @@ select option {
 }
 
 .code_EELV {
-  background-color: #00c000;
+  background-color: #55A630;
 }
 
 .code_PRG {
@@ -241,11 +266,11 @@ select option {
 }
 
 .code_EAC {
-  background-color: #77ff77;
+  background-color: #AACC00;
 }
 
 .code_ENS {
-  background-color: #ffeb00;
+  background-color: #EE9B00;
 }
 
 .code_AR {
@@ -253,19 +278,19 @@ select option {
 }
 
 .code_NE {
-  background-color: #adc1fd;
+  background-color: #b58db6;
 }
 
 .code_LR {
-  background-color: #0066CC;
+  background-color: #014F86;
 }
 
 .code_DLF {
-  background-color: #0082C4;
+  background-color: #013A63;
 }
 
 .code_RN {
-  background-color: #0D378A;
+  background-color: #012541;
 }
 
 .code_REC {
@@ -296,12 +321,17 @@ select option {
 
 #container {
   margin: 0px auto;
-  width: max-content;
+  width: 600px;
 }
 
 @media screen and (max-device-width: 440px) {
   #txtHint {
     padding: 20px;
+  }
+
+  #container {
+    margin: 0px auto;
+    width: 300px;
   }
 }
 
