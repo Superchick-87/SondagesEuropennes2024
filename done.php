@@ -21,6 +21,7 @@ $chemin_fichier_csv = 'fichier_cache.csv';
 // Ouvrir le fichier en mode lecture
 $fichier = fopen($chemin_fichier_csv, 'r');
 
+// echo '<img src="images/Logo_' . $nomsColonnes[$i] . '.png"/>';
 // Vérifier si le fichier est ouvert avec succès
 if ($fichier !== false) {
 	// Lire la première ligne pour obtenir les noms des colonnes (facultatif)
@@ -38,8 +39,7 @@ if ($fichier !== false) {
 			echo '<div id="container" >';
 			for ($i = 3; $i < 19; $i++) {
 				echo '<div >';
-				// echo '<img src="images/Logo_' . $nomsColonnes[$i] . '.png"/>';
-				echo '<div class="spaceTop" style="text-align: justify;">' . $nomsColonnes[$i] . '</div>';
+				echo '<div class="spaceTop" style="text-align: justify;">' . partis($nomsColonnes[$i]) . '</div>';
 				echo '<div class="barrGraph" style="display: flex;">
 					<div class="code_' . $nomsColonnes[$i] . ' spaceR" style="width:' . ((minData((int)(ddc($ligne[$i])))) * 2) . '%;"></div>
 					<div class="txtNoWrap bigdata2">' . $ligne[$i] . ' %</div>
