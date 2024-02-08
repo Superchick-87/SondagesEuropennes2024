@@ -54,7 +54,7 @@ if ($handle !== false) {
 	// Lire le contenu du fichier dans un tableau
 	$contenu = [];
 	while (($data = fgetcsv($handle)) !== false) {
-		for ($n = 0; $n < 19; $n++) {
+		for ($n = 0; $n < count($data); $n++) {
 			// Effectuer les modifications nécessaires sur chaque ligne
 			$data[$n] = cleanData(suppStr($data[$n]));
 		}

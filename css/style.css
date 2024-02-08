@@ -172,6 +172,15 @@ select option {
   padding: 30px;
 }
 
+.indice {
+  background-color: #00000029;
+  border: 2px solid;
+  border-color: #ff000000 black;
+  height: 13px;
+  top: 20px;
+  backdrop-filter: blur(15px);
+}
+
 .blocparagraphe {
   margin: 0px auto;
   width: 70%;
@@ -212,7 +221,7 @@ select option {
 .bigdata2 {
   font-family: Ultra;
   font-size: 1.5em;
-  line-height: 1.1em;
+  line-height: 0.5em;
   color: #40545d;
 }
 
@@ -229,7 +238,7 @@ select option {
 }
 
 .spaceTop {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .spaceR {
@@ -310,6 +319,7 @@ select option {
   width: 0%;
   height: 30px;
   animation: expandWidth 2s ease forwards;
+  margin-top: -10px;
 }
 
 @keyframes expandWidth {

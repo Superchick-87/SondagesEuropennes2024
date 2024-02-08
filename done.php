@@ -38,16 +38,21 @@ if ($fichier !== false) {
 			// echo implode(', ', $ligne) . "<br>";
 			echo '<div id="container" >';
 			for ($i = 3; $i < 19; $i++) {
-				echo '<div >';
+				echo '<div>';
 				echo '<div class="spaceTop" style="text-align: justify;">' . partis($nomsColonnes[$i]) . '</div>';
-				echo '<div class="barrGraph" style="display: flex;">
-					<div class="code_' . $nomsColonnes[$i] . ' spaceR" style="width:' . ((minData((int)(ddc($ligne[$i])))) * 2) . '%;"></div>
-					<div class="txtNoWrap bigdata2">' . $ligne[$i] . ' %</div>
-					</div>';
+				// echo '<div>' . ($ligne[36 + $i] - $ligne[20 + $i]) . '</div>';
+				// echo '<div>' . $ligne[20 + $i] . '|' . $ligne[36 + $i] . '</div>';
+
+				echo '<div class="indice" style="position:relative; left:' . minData($ligne[20 + $i]) * 2 . '%;  width:' . (minData(($ligne[36 + $i] - $ligne[20 + $i]))) * 2 . '%; "></div>';
+
+				echo '<div class="barrGraph" style="display: flex;">';
+				echo '<div class="code_' . $nomsColonnes[$i] . ' spaceR" style="width:' . ((minData((int)($ligne[$i]))) * 2) . '%;"></div>
+				<div class="txtNoWrap bigdata2">' . $ligne[$i] . ' %</div>';
+				echo '</div>';
 				echo '</div>';
 			}
-			echo '</div>';
 		}
+		echo '</div>';
 	}
 	// Fermer le fichier
 	fclose($fichier);
