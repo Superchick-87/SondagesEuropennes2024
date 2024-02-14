@@ -12,7 +12,41 @@ function minData($x)
 };
 
 @$dataStart = $_GET['data1'];
+@$dataStartD = $_GET['data2'];
 // echo $dataStart;
+echo $dataStartD;
+
+
+
+/**
+ * * Appel et lecture du csv pour affichage des options dans le select
+ */
+$chemin_fichier_csv = 'fichier_cache.csv';
+// Ouvrez le fichier en mode lecture
+$fichier = fopen($chemin_fichier_csv, 'r');
+
+// Lire le fichier ligne par ligne jusqu'à ce que 'toto' soit trouvé
+echo '<select class="box" id="choix2" name="choix2" onchange="showCustomer2(this.value);">';
+while (($ligne = fgetcsv($fichier)) !== FALSE) {
+	
+	if (($ligne[22] != '') && ($dataStart == $ligne[20] . ' | ' . $ligne[21])) {
+					// Vérifier si la ligne contient 'toto'
+					if ((in_array('OpinionWay', $ligne)) && (in_array('13-14 décembre 2023', $ligne))) {
+						// Faire quelque chose lorsque 'toto' est trouvé dans la ligne
+						echo '<option value="' .$ligne[22] . '">Hypothèse ' . $ligne[22]. '</option>';
+						echo "Le mot '13-14 décembre 2023' a été trouvé dans la ligne : " . implode(', ', $ligne);
+						break; // Sortir de la boucle une fois que 'toto' est trouvé
+					}
+					echo '<option value="' . $ligne[22] . '">Hypothèse ' . $ligne[22] . '</option>';
+					// Si 'toto' n'est pas trouvé, continuer à lire les lignes suivantes
+					
+				}
+			}
+			echo '</select>';
+			// Fermer le fichier
+			fclose($fichier);
+			
+
 
 /**
  * * Appel et lecture du csv

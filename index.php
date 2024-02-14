@@ -49,6 +49,7 @@ date_default_timezone_set('Europe/Paris');
 			fclose($fichier);
 			?>
 		</select>
+		
 	</form>
 	<div class="accordion">Comment lire les résultats des sondages</div>
 	<div class="panel">
@@ -93,6 +94,7 @@ date_default_timezone_set('Europe/Paris');
 	/*=====================================
 	=            Fonction ajax            =
 	=====================================*/
+
 	function showCustomer(str) {
 		var data1 = document.getElementById("choix1").value;
 		var xhttp;
@@ -105,22 +107,59 @@ date_default_timezone_set('Europe/Paris');
 			if (this.readyState == 4 && this.status == 200) {
 				document.getElementById("txtHint").innerHTML = "";
 				console.log(data1);
-
+				// console.log(data2);
+				
 			}
 			document.getElementById("txtHint").innerHTML = this.responseText;
 			getInnerHTML();
+			// var data2 = document.getElementById("choix2").value;
+			// console.log(data2);
+			
 		};
-
+		
 		/* Methode GET -> passe une seule variable */
 		/* Methode POST -> passe plusieurs variables */
-		xhttp.open("GET", "done.php?data1=" + data1, true);
-		xhttp.send();
-		// xhttp.open("POST", "index3.php", true);
-		// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		// xhttp.send("data1=" + data1);
+		
+			// xhttp.open("POST", "index3.php", true);
+			// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			// xhttp.send("data1=" + data1+"&data2=" + data2);
+			
+		
+			xhttp.open("GET", "done.php?data1=" + data1, true);
+			xhttp.send();
+
+	
 	};
 
-
+	function showCustomer2(str) {
+		var data2 = document.getElementById("choix2").value;
+		console.log(data2);
+		var xhttp;
+		if (str == "") {
+			document.getElementById("txtHint").innerHTML = "";
+			return;
+		}
+		xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("txtHint").innerHTML = "";
+				
+				
+			}
+			document.getElementById("txtHint").innerHTML = this.responseText;
+			// getInnerHTML();
+			
+		};
+		
+		// /* Methode GET -> passe une seule variable */
+		// /* Methode POST -> passe plusieurs variables */
+		xhttp.open("GET", "done.php?data2=" + data2, true);
+		xhttp.send();
+		// // xhttp.open("POST", "index3.php", true);
+		// // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		// // xhttp.send("data1=" + data1);
+		
+	};
 	/*=====  End of Fonction ajax  ======*/
 </script>
 <!-- <script src="js/aos.js"></script>
