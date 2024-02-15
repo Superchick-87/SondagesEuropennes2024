@@ -21,7 +21,7 @@ date_default_timezone_set('Europe/Paris');
 	<h1>Européennes 2024, tous les sondages</h1>
 	<br>
 	<form action="">
-		<select class="box" id="choix1" name="choix1" onchange="showCustomer(this.value);">
+		<select class="box" id="choix1" name="choix1" onchange="showCustomer(this.value); start();">
 			<?php
 			/**
 			 * * Appel et lecture du csv pour affichage des options dans le select
@@ -35,7 +35,7 @@ date_default_timezone_set('Europe/Paris');
 
 				if ($ligne[0] != '') {
 					// Vérifier si la ligne contient 'toto'
-					if ((in_array('OpinionWay', $ligne)) && (in_array('13-14 décembre 2023', $ligne))) {
+					if ((in_array('OpinionWay', $ligne)) && (in_array('11-12 octobre 2023', $ligne))) {
 						// Faire quelque chose lorsque 'toto' est trouvé dans la ligne
 						echo '<option value="' . htmlspecialchars($ligne[0]) . ' | ' . htmlspecialchars($ligne[1]) . '">' . $ligne[0] . ' | ' . $ligne[1] . '</option>';
 						echo "Le mot '13-14 décembre 2023' a été trouvé dans la ligne : " . implode(', ', $ligne);
@@ -73,8 +73,12 @@ date_default_timezone_set('Europe/Paris');
 			</div>
 		</div>
 	</div>
-	<div id="txtHint"></div>
+	<div id="txtHint" style="display:none;"></div>
 	<br>
+	<!-- <select style="display:block;" class="box" id="choix2" name="choix2" onchange="showCustomer2(this.value);"></select> -->
+	<div id="txtHint2"></div>
+	<br>
+
 	<hr>
 	<div class="blocparagraphe">
 		<br>
@@ -87,7 +91,9 @@ date_default_timezone_set('Europe/Paris');
 </body>
 
 <script type="text/javascript">
-	// window.onload = showCustomer();
+	window.onload = showCustomer();
+	window.onload = showCustomer2();
+	window.onload = nbreOptSel();
 	document.getElementById("choix1").addEventListener("onchange", showCustomer);
 	var data1 = document.getElementById('choix1').value;
 
@@ -100,6 +106,7 @@ date_default_timezone_set('Europe/Paris');
 		var xhttp;
 		if (str == "") {
 			document.getElementById("txtHint").innerHTML = "";
+			
 			return;
 		}
 		xhttp = new XMLHttpRequest();
@@ -111,56 +118,79 @@ date_default_timezone_set('Europe/Paris');
 				
 			}
 			document.getElementById("txtHint").innerHTML = this.responseText;
+			nbreOptSel();
 			getInnerHTML();
-			// var data2 = document.getElementById("choix2").value;
-			// console.log(data2);
+			showCustomer2();
 			
 		};
 		
 		/* Methode GET -> passe une seule variable */
 		/* Methode POST -> passe plusieurs variables */
 		
-			// xhttp.open("POST", "index3.php", true);
-			// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			// xhttp.send("data1=" + data1+"&data2=" + data2);
+		xhttp.open("POST", "done.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("data1="+data1);
 			
 		
-			xhttp.open("GET", "done.php?data1=" + data1, true);
-			xhttp.send();
+			// xhttp.open("GET", "done.php?data1=" + data1, true);
+			// xhttp.send();
 
 	
 	};
 
 	function showCustomer2(str) {
+		var data1 = document.getElementById("choix1").value;
 		var data2 = document.getElementById("choix2").value;
-		console.log(data2);
+		
 		var xhttp;
 		if (str == "") {
-			document.getElementById("txtHint").innerHTML = "";
+			document.getElementById("txtHint2").innerHTML = "";
 			return;
 		}
 		xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("txtHint").innerHTML = "";
-				
+				// document.getElementById("choix2").innerHTML = "";
+				document.getElementById("txtHint2").innerHTML = this.responseText;
 				
 			}
-			document.getElementById("txtHint").innerHTML = this.responseText;
-			// getInnerHTML();
+			document.getElementById("txtHint2").innerHTML = this.responseText;
 			
+			var firstChild = document.getElementById("txtHint2").firstElementChild;
+			document.getElementById("txtHint2").removeChild(firstChild);
+			
+			nbreOptSel();
+			console.log(data1);
+		console.log(data2);
+			// document.getElementById("txtHint").style.display = "none";
 		};
 		
 		// /* Methode GET -> passe une seule variable */
 		// /* Methode POST -> passe plusieurs variables */
-		xhttp.open("GET", "done.php?data2=" + data2, true);
-		xhttp.send();
-		// // xhttp.open("POST", "index3.php", true);
-		// // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		// // xhttp.send("data1=" + data1);
+		// xhttp.open("GET", "done.php?data2=" + data2, true);
+		// xhttp.send();
+		xhttp.open("POST", "done.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("data1="+data1+"&data2="+data2);
 		
 	};
 	/*=====  End of Fonction ajax  ======*/
+
+	function nbreOptSel(){
+		var selectElement = document.getElementById("choix2");
+		// Obtenir le nombre d'options dans l'élément <select>
+		var numberOfOptions = selectElement.options.length;
+		var fondSel2 = document.getElementById("fondSel2");
+		if (numberOfOptions == 1) {
+			selectElement.style.display = 'none';
+			fondSel2.classList.remove("sel2");
+		}
+		
+	};
+	// window.onload = start();
+	function start(){
+		document.getElementById("txtHint").style.display = "block";
+	};
 </script>
 <!-- <script src="js/aos.js"></script>
 <script>
@@ -168,6 +198,7 @@ date_default_timezone_set('Europe/Paris');
 		easing: 'ease-in-out-sine'
 	});
 </script> -->
+
 <script>
 	function getInnerHTML() {
 		// Sélectionnez tous les éléments avec la classe "elementWithHTML"

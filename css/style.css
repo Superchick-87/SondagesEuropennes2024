@@ -45,6 +45,7 @@ h6 {
 h1 {
   margin: 10px auto 0px;
   font-size: 2em;
+  padding: 10px;
 }
 
 h2 {
@@ -100,7 +101,7 @@ hr.bloc {
 
 
 
-#txtHint {
+#txtHint, #txtHint2 {
   /* background-color: #dadada7d; */
   display: block;
   background-image: url(../images/fond.png);
@@ -108,7 +109,7 @@ hr.bloc {
   background-position: 80% -70%;
 }
 
-form {
+form, .sel2 {
   margin: 0px auto;
   background-color: #dadadac7;
   margin-top: 10px;
