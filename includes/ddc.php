@@ -34,5 +34,6 @@ function partis($tring)
 	$tring = str_replace("REC", "REC - Reconquête", $tring);
 	$tring = str_replace("PA", "PA - Parti animaliste", $tring);
 	$tring = str_replace("Autres", "Autres", $tring);
+	$tring = str_replace("UPR", "UPR - Union populaire républicaine", $tring);
 	return $tring;
 };

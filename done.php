@@ -6,7 +6,16 @@ function minData($x)
 	if ($x < 1) {
 		$x = 1;
 		return $x * 0.5;
-	} else {
+	} 
+	if ($x == 'nc') {
+		$x = 0;
+		return $x;
+	} 
+	// if ($x == '<1') {
+	// 	$x = 1;
+	// 	return $x * 0.5;
+	// }
+	else {
 		return $x;
 	}
 };
@@ -28,8 +37,9 @@ $chemin_fichier_csv = 'fichier_cache.csv';
 $fichier = fopen($chemin_fichier_csv, 'r');
 
 // Lire le fichier ligne par ligne jusqu'à ce que 'toto' soit trouvé
-echo '<div id="fondSel2" class="sel2"><select style="display:block;" class="box" id="choix2" name="choix2" onchange="showCustomer2(this.value);">';
-echo '<option>Hypothèse</option>';
+echo '<div id="fondSel2" class="sel2">
+<select style="display:block;" class="box" id="choix2" name="choix2" onchange="showCustomer2(this.value);">';
+echo '<option>Comparer les hypothèses</option>';
 while (($ligne = fgetcsv($fichier)) !== FALSE) {
 	
 	if (($ligne[22] != '') && ($dataStart== $ligne[20] . ' | ' . $ligne[21])) {
@@ -80,8 +90,8 @@ if ($fichier !== false) {
 			// Exemple : Afficher les valeurs de chaque colonne
 			// echo implode(', ', $ligne) . "<br>";
 			echo '<div id="container" >';
+			echo '</br><div class="bigdata3">' . number_format($ligne[2],0, ',', ' ') . ' personnes interrogées</div>';
 			for ($i = 3; $i < 20; $i++) {
-					# code...
 					echo '<div>';
 					echo '<div class="spaceTop" style="text-align: justify;">' . partis($nomsColonnes[$i]) . '</div>';
 					// echo '<div>' . ($ligne[36 + $i] - $ligne[20 + $i]) . '</div>';
@@ -91,6 +101,7 @@ if ($fichier !== false) {
 					
 					echo '<div class="barrGraph" style="display: flex;">';
 					echo '<div class="code_' . $nomsColonnes[$i] . ' spaceR" style="width:' . ((minData((int)($ligne[$i]))) * 2) . '%;"></div>
+					
 					<div class="txtNoWrap bigdata2">' . $ligne[$i] . ' %</div>';
 					echo '</div>';
 					echo '</div>';

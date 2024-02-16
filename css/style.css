@@ -112,11 +112,10 @@ hr.bloc {
 form, .sel2 {
   margin: 0px auto;
   background-color: #dadadac7;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  display: grid;
+  /* margin-top: 10px; */
+  /* margin-bottom: 20px; */
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 img {
@@ -185,7 +184,7 @@ select option {
 .blocparagraphe {
   margin: 0px auto;
   width: 70%;
-  text-align: left;
+  /* text-align: left; */
 }
 
 .legend {
@@ -225,13 +224,19 @@ select option {
   line-height: 0.5em;
   color: #40545d;
 }
-
+.bigdata3 {
+  font-family: Ultra;
+  font-size: 1.2em;
+  /* line-height: 0.5em; */
+  color: #40545d;
+}
 .spaceH {
   margin-top: 50px;
 }
 
 .spaceH2 {
-  margin-bottom: 140px;
+  /* margin-bottom: 140px; */
+  margin-bottom: 70px;
 }
 
 .spaceH3 {
@@ -300,7 +305,7 @@ select option {
 }
 
 .code_RN {
-  background-color: #012541;
+  background-color: #41555f;
 }
 
 .code_REC {
@@ -313,6 +318,9 @@ select option {
 
 .code_Autres {
   background-color: #eeeeee;
+}
+.code_UPR {
+  background-color: #118088;
 }
 
 /* barre graph */
@@ -336,9 +344,9 @@ select option {
 }
 
 @media screen and (max-device-width: 440px) {
-  #txtHint {
+  /* #txtHint {
     padding: 20px;
-  }
+  } */
 
   #container {
     margin: 0px auto;
