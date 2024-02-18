@@ -80,11 +80,13 @@ date_default_timezone_set('Europe/Paris');
 	</div>
 	<hr>
 	<div class="blocparagraphe">
-		<br>
+	</br>
 		<h5>Source et méthodologie</h5>
 		<p class="grey">Les données ont été rassemblées par les contributeurs <a href="https://fr.wikipedia.org/wiki/Sondages_sur_les_%C3%A9lections_europ%C3%A9ennes_de_2024" target="_blank">Wikipedia</a>.
 		</p>
 	</div>
+	</br>
+	</br>
 	<footer></footer>
 </body>
 
