@@ -16,7 +16,6 @@ date_default_timezone_set('Europe/Paris');
 ?>
 
 <body class='pattern-dots-sm'>
-
 	<h1>Européennes 2024, les derniers sondages</h1>
 	<br>
 	<form action="">
@@ -46,11 +45,9 @@ date_default_timezone_set('Europe/Paris');
 					// Si 'toto' n'est pas trouvé, continuer à lire les lignes suivantes
 				}
 			}
-			// Fermer le fichier
 			fclose($fichier);
 			?>
 		</select>
-		
 	</form>
 		<div id="txtHint" ></div>
 		</br>
@@ -81,8 +78,6 @@ date_default_timezone_set('Europe/Paris');
 			</div>
 		</div>
 	</div>
-
-
 	<hr>
 	<div class="blocparagraphe">
 		<br>
@@ -109,8 +104,6 @@ date_default_timezone_set('Europe/Paris');
 		var xhttp;
 		if (str == "") {
 			document.getElementById("txtHint").innerHTML = "";
-			
-			
 			return;
 		}
 		xhttp = new XMLHttpRequest();
@@ -119,27 +112,17 @@ date_default_timezone_set('Europe/Paris');
 				document.getElementById("txtHint").innerHTML = "";
 				// console.log(data1);
 				// console.log(data2);
-				
 			}
 			document.getElementById("txtHint").innerHTML = this.responseText;
 			nbreOptSel();
 			getInnerHTML();
 			showCustomer2();
-			
 		};
-		
-		/* Methode GET -> passe une seule variable */
-		/* Methode POST -> passe plusieurs variables */
-		
 		xhttp.open("POST", "done.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("data1="+data1);
-			
-		
-			// xhttp.open("GET", "done.php?data1=" + data1, true);
-			// xhttp.send();
-
-	
+		// xhttp.open("GET", "done.php?data1=" + data1, true);
+		// xhttp.send();
 	};
 
 	function showCustomer2(str) {
@@ -154,7 +137,6 @@ date_default_timezone_set('Europe/Paris');
 		xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				// document.getElementById("choix2").innerHTML = "";
 				document.getElementById("txtHint2").innerHTML = this.responseText;
 				
 			}
@@ -162,15 +144,11 @@ date_default_timezone_set('Europe/Paris');
 			
 			var firstChild = document.getElementById("txtHint2").firstElementChild;
 			document.getElementById("txtHint2").removeChild(firstChild);
-			
 			nbreOptSel();
 		// 	console.log(data1);
 		// console.log(data2);
 			// document.getElementById("txtHint").style.display = "none";
 		};
-		
-		// /* Methode GET -> passe une seule variable */
-		// /* Methode POST -> passe plusieurs variables */
 		// xhttp.open("GET", "done.php?data2=" + data2, true);
 		// xhttp.send();
 		xhttp.open("POST", "done.php", true);
@@ -192,18 +170,10 @@ date_default_timezone_set('Europe/Paris');
 		}
 		
 	};
-	// window.onload = start();
 	function start(){
 		document.getElementById("txtHint").style.display = "block";
 	};
 </script>
-<!-- <script src="js/aos.js"></script>
-<script>
-	AOS.init({
-		easing: 'ease-in-out-sine'
-	});
-</script> -->
-
 <script>
 	function getInnerHTML() {
 		// Sélectionnez tous les éléments avec la classe "elementWithHTML"
@@ -216,13 +186,10 @@ date_default_timezone_set('Europe/Paris');
 				elements2[i].style.width = '0px';
 				elements[i].innerHTML = 'nc';
 			}
-
 		}
 	};
-
 	// Sélectionner l'élément à ajuster
 	var monElement = document.getElementById('monElement');
-
 	// Définir la largeur de l'élément égale à la largeur de l'écran
 	monElement.style.width = window.innerWidth + 'px';
 </script>
