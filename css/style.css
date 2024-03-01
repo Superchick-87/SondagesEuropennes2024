@@ -101,18 +101,15 @@ hr.bloc {
 
 
 
-#txtHint,
-#txtHint2 {
+#txtHint, #txtHint2 {
   /* background-color: #dadada7d; */
   display: block;
   background-image: url(../images/fond.png);
   background-repeat: no-repeat;
   background-position: 80% -70%;
-
 }
 
-form,
-.sel2 {
+form, .sel2 {
   margin: 0px auto;
   background-color: #dadadac7;
   /* margin-top: 10px; */
@@ -227,14 +224,12 @@ select option {
   line-height: 0.5em;
   color: #40545d;
 }
-
 .bigdata3 {
   font-family: Ultra;
   font-size: 1.2em;
   /* line-height: 0.5em; */
   color: #40545d;
 }
-
 .spaceH {
   margin-top: 50px;
 }
@@ -324,9 +319,14 @@ select option {
 .code_Autres {
   background-color: #eeeeee;
 }
-
 .code_UPR {
   background-color: #118088;
+}
+.code_RES {
+  background-color: #26c4ec;
+}
+.code_LP {
+  background-color: #8D2E88;
 }
 
 /* barre graph */

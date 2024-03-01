@@ -49,8 +49,8 @@ date_default_timezone_set('Europe/Paris');
 			?>
 		</select>
 	</form>
-	<div id="txtHint"></div>
-	</br>
+		<div id="txtHint" ></div>
+		</br>
 	<div id="txtHint2"></div>
 	<div class="accordion">Comment lire les résultats des sondages</div>
 	<div class="panel">
@@ -74,13 +74,13 @@ date_default_timezone_set('Europe/Paris');
 					<span><i style="letter-spacing: -0.5;">haute</i></span>
 				</div>
 				<p class="blocparagraphe grey spaceH3">Chaque parti se voit attribuer un score potentiel situé au milieu de cet intervalle de confiance entre la fourchette basse et la fourchette haute du résultat du sondage.</p>
-				</br>
+		</br>
 			</div>
 		</div>
 	</div>
 	<hr>
 	<div class="blocparagraphe">
-		</br>
+	</br>
 		<h5>Source et méthodologie</h5>
 		<p class="grey">Les données ont été rassemblées par les contributeurs <a href="https://fr.wikipedia.org/wiki/Sondages_sur_les_%C3%A9lections_europ%C3%A9ennes_de_2024" target="_blank">Wikipedia</a>.
 		</p>
@@ -122,7 +122,7 @@ date_default_timezone_set('Europe/Paris');
 		};
 		xhttp.open("POST", "done.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("data1=" + data1);
+		xhttp.send("data1="+data1);
 		// xhttp.open("GET", "done.php?data1=" + data1, true);
 		// xhttp.send();
 	};
@@ -130,7 +130,7 @@ date_default_timezone_set('Europe/Paris');
 	function showCustomer2(str) {
 		var data1 = document.getElementById("choix1").value;
 		var data2 = document.getElementById("choix2").value;
-
+		
 		var xhttp;
 		if (str == "") {
 			document.getElementById("txtHint2").innerHTML = "";
@@ -140,27 +140,28 @@ date_default_timezone_set('Europe/Paris');
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				document.getElementById("txtHint2").innerHTML = this.responseText;
-
+				
 			}
 			document.getElementById("txtHint2").innerHTML = this.responseText;
-
+			
 			var firstChild = document.getElementById("txtHint2").firstElementChild;
 			document.getElementById("txtHint2").removeChild(firstChild);
 			nbreOptSel();
-			// 	console.log(data1);
-			// console.log(data2);
+			echantillon();
+		// 	console.log(data1);
+		// console.log(data2);
 			// document.getElementById("txtHint").style.display = "none";
 		};
 		// xhttp.open("GET", "done.php?data2=" + data2, true);
 		// xhttp.send();
 		xhttp.open("POST", "done.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("data1=" + data1 + "&data2=" + data2);
-
+		xhttp.send("data1="+data1+"&data2="+data2);
+		
 	};
 	/*=====  End of Fonction ajax  ======*/
 
-	function nbreOptSel() {
+	function nbreOptSel(){
 		var selectElement = document.getElementById("choix2");
 		// Obtenir le nombre d'options dans l'élément <select>
 		var numberOfOptions = selectElement.options.length;
@@ -170,10 +171,9 @@ date_default_timezone_set('Europe/Paris');
 			fondSel2.classList.remove("sel2");
 			fondSel2.style.display = 'none';
 		}
-
+		
 	};
-
-	function start() {
+	function start(){
 		document.getElementById("txtHint").style.display = "block";
 	};
 </script>
@@ -195,6 +195,13 @@ date_default_timezone_set('Europe/Paris');
 	var monElement = document.getElementById('monElement');
 	// Définir la largeur de l'élément égale à la largeur de l'écran
 	monElement.style.width = window.innerWidth + 'px';
+
+	function echantillon(){
+		var echantillon = document.getElementById('echantillon');
+		if (echantillon.innerHtml == ' personnes interrogées') {
+			echantillon.style.display = 'none';
+		}
+	}
 </script>
 <script src="js/accordeon.js"></script>
 

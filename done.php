@@ -13,6 +13,7 @@ function minData($x)
 		return $x;
 	}
 };
+
 @$dataStart = $_POST['data1'];
 @$dataStartDC = $_POST['data2'];
 
@@ -29,15 +30,15 @@ echo '<div id="fondSel2" class="sel2">
 echo '<option>Comparer les hypothèses</option>';
 while (($ligne = fgetcsv($fichier)) !== FALSE) {
 
-	if (($ligne[22] != '') && ($dataStart == $ligne[20] . ' | ' . $ligne[21])) {
+	if (($ligne[24] != '') && ($dataStart == $ligne[22] . ' | ' . $ligne[23])) {
 		// Vérifier si la ligne contient 'toto'
 		if ((in_array('OpinionWay', $ligne)) && (in_array('13-14 décembre 2023', $ligne))) {
 			// Faire quelque chose lorsque 'toto' est trouvé dans la ligne
-			echo '<option value="' . $ligne[22] . '" >' . $ligne[22] . '</option>';
+			echo '<option value="' . $ligne[24] . '" >' . $ligne[24] . '</option>';
 			echo "Le mot '13-14 décembre 2023' a été trouvé dans la ligne : " . implode(', ', $ligne);
 			break; // Sortir de la boucle une fois que 'toto' est trouvé
 		} else {
-			echo '<option value="' . $ligne[22] . '">' . $ligne[22] . '</option>';
+			echo '<option value="' . $ligne[24] . '">' . $ligne[24] . '</option>';
 			// Si 'toto' n'est pas trouvé, continuer à lire les lignes suivantes
 		}
 	}
@@ -58,17 +59,17 @@ if ($fichier !== false) {
 	$nomsColonnes = fgetcsv($fichier);
 	// Lire le reste du fichier CSV ligne par ligne
 	while (($ligne = fgetcsv($fichier)) !== false) {
-		if (($dataStart == $ligne[20] . ' | ' . $ligne[21]) && ($ligne[22] == $dataStartDC)) {
+		if (($dataStart == $ligne[22] . ' | ' . $ligne[23]) && ($ligne[24] == $dataStartDC)) {
 			// Faire quelque chose avec les valeurs de la ligne
 			// $ligne est un tableau contenant les valeurs des colonnes de la ligne
 			// Exemple : Afficher les valeurs de chaque colonne
 			// echo implode(', ', $ligne) . "<br>";
-			echo '</br><div class="bigdata3">' . number_format($ligne[2], 0, ',', ' ') . ' personnes interrogées</div>';
+			echo '</br><div id="echantillon" class="bigdata3">' . number_format($ligne[2], 0, ',', ' ') . ' personnes interrogées</div>';
 			echo '<div id="container" >';
-			for ($i = 3; $i < 20; $i++) {
+			for ($i = 3; $i < 22; $i++) {
 				echo '<div>';
 				echo '<div class="spaceTop" style="text-align: justify;">' . partis($nomsColonnes[$i]) . '</div>';
-				echo '<div class="indice" style="position:relative; left:' . minData($ligne[20 + $i]) * 2 . '%;  width:' . (minData(($ligne[37 + $i] - $ligne[20 + $i]))) * 2 . '%; "></div>';
+				echo '<div class="indice" style="position:relative; left:' . minData($ligne[22 + $i]) * 2 . '%;  width:' . (minData(($ligne[41 + $i] - $ligne[22 + $i]))) * 2 . '%; "></div>';
 				echo '<div class="barrGraph" style="display: flex;">';
 				echo '<div class="code_' . $nomsColonnes[$i] . ' spaceR" style="width:' . ((minData((int)($ligne[$i]))) * 2) . '%;"></div>
 					<div class="txtNoWrap bigdata2">' . $ligne[$i] . ' %</div>';
