@@ -33,7 +33,7 @@ date_default_timezone_set('Europe/Paris');
 			// Lire le fichier ligne par ligne jusqu'à ce que 'toto' soit trouvé
 			while (($ligne = fgetcsv($fichier)) !== FALSE) {
 
-				if ($ligne[0] != '') {
+				if (($ligne[0] != '')  && ($ligne[1] !='')) {
 					// Vérifier si la ligne contient 'toto'
 					if ((in_array('OpinionWay', $ligne)) && (in_array('13-14 décembre 2023', $ligne))) {
 						// Faire quelque chose lorsque 'toto' est trouvé dans la ligne
