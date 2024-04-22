@@ -37,5 +37,7 @@ function partis($tring)
 	$tring = str_replace("UPR", "UPR - Union populaire républicaine", $tring);
 	$tring = str_replace("RES", "RES - Résistons", $tring);
 	$tring = str_replace("LP", "LP - Les Patriotes", $tring);
+	$tring = str_replace("EP", "EP - Ecologie positive", $tring);
+	$tring = str_replace("ND", "ND - Nouvelle Donne", $tring);
 	return $tring;
 };

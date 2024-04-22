@@ -272,14 +272,16 @@ select option {
   background-color: #FF8080;
 }
 
-.code_EELV {
+.code_EELV, .code_EP {
   background-color: #55A630;
 }
 
-.code_PRG {
+.code_PRG, .code_ND {
   background-color: #ffd1dc;
 }
-
+.code_NPA {
+  background-color: #7a6308;
+}
 .code_EAC {
   background-color: #AACC00;
 }

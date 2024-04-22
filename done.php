@@ -28,17 +28,18 @@ $fichier = fopen($chemin_fichier_csv, 'r');
 echo '<div id="fondSel2" class="sel2">
 <select style="display:block;" class="box" id="choix2" name="choix2" onchange="showCustomer2(this.value);">';
 echo '<option>Comparer les hypothèses</option>';
+$AjoutParti = 1;
 while (($ligne = fgetcsv($fichier)) !== FALSE) {
 
-	if (($ligne[26] != '') && ($dataStart == $ligne[24] . ' | ' . $ligne[25])) {
+	if (($ligne[26+$AjoutParti] != '') && ($dataStart == $ligne[24+$AjoutParti] . ' | ' . $ligne[25+$AjoutParti])) {
 		// Vérifier si la ligne contient 'toto'
 		if ((in_array('OpinionWay', $ligne)) && (in_array('13-14 décembre 2023', $ligne))) {
 			// Faire quelque chose lorsque 'toto' est trouvé dans la ligne
-			echo '<option value="' . $ligne[26] . '" >' . $ligne[26] . '</option>';
+			echo '<option value="' . $ligne[26+$AjoutParti] . '" >' . $ligne[26+$AjoutParti] . '</option>';
 			echo "Le mot '13-14 décembre 2023' a été trouvé dans la ligne : " . implode(', ', $ligne);
 			break; // Sortir de la boucle une fois que 'toto' est trouvé
 		} else {
-			echo '<option value="' . $ligne[26] . '">' . $ligne[26] . '</option>';
+			echo '<option value="' . $ligne[26+$AjoutParti] . '">' . $ligne[26+$AjoutParti] . '</option>';
 			// Si 'toto' n'est pas trouvé, continuer à lire les lignes suivantes
 		}
 	}
@@ -60,20 +61,17 @@ if ($fichier !== false) {
 	// Lire la première ligne pour obtenir les noms des colonnes (facultatif)
 	$nomsColonnes = fgetcsv($fichier);
 	// Lire le reste du fichier CSV ligne par ligne
+
 	while (($ligne = fgetcsv($fichier)) !== false) {
-		if (($dataStart == $ligne[24] . ' | ' . $ligne[25]) && ($ligne[26] == $dataStartDC)&& ($nomsColonnes != '$dataStartDC')) {
-			// Faire quelque chose avec les valeurs de la ligne
-			// $ligne est un tableau contenant les valeurs des colonnes de la ligne
-			// Exemple : Afficher les valeurs de chaque colonne
-			// echo implode(', ', $ligne) . "<br>";
-			
+		if (($dataStart == $ligne[24+ $AjoutParti] . ' | ' . $ligne[25+ $AjoutParti]) && ($ligne[26+ $AjoutParti] == $dataStartDC)&& ($nomsColonnes != '$dataStartDC')) {
+
 			echo '</br><div id="echantillon" class="bigdata3">' . number_format($ligne[2], 0, ',', ' ') . ' personnes interrogées</div>';
 			echo '<div id="container" >';
-			for ($i = 3; $i < 24; $i++) {
-				if ($i != 14) {
+			for ($i = 3; $i < (24 + $AjoutParti); $i++) {
+				if ($i != 15) { // colonne à ne pas afficher : 'RES'
 				echo '<div>';
 				echo '<div class="spaceTop" style="text-align: justify;">' . partis($nomsColonnes[$i]) . '</div>';
-				echo '<div class="indice" style="position:relative; left:' . minData($ligne[24 + $i]) * 2 . '%;  width:' . (minData(($ligne[45 + $i] - $ligne[24 + $i]))) * 2 . '%; "></div>';
+				echo '<div class="indice" style="position:relative; left:' . minData($ligne[24+ $AjoutParti + $i]) * 2 . '%;  width:' . (minData(($ligne[46+ $AjoutParti + $i] - $ligne[24+ $AjoutParti + $i]))) * 2 . '%; "></div>';
 				echo '<div class="barrGraph" style="display: flex;">';
 				echo '<div class="code_' . $nomsColonnes[$i] . ' spaceR" style="width:' . ((minData((int)($ligne[$i]))) * 2) . '%;"></div>
 					<div class="txtNoWrap bigdata2">' . $ligne[$i] . ' %</div>';
