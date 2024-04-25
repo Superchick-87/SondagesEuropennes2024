@@ -36,5 +36,6 @@ function cleanData($tring)
 	$tring = str_replace("–", "nc", $tring);
 	$tring = str_replace("", "nc", $tring);
 	$tring = str_replace(",", ".", $tring);
+	$tring = str_replace("PSPP", "PS", $tring);
 	return $tring;
 };
