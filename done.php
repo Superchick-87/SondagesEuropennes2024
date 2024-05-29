@@ -70,9 +70,9 @@ if ($fichier !== false) {
 			for ($i = 3; $i < (24 + $AjoutParti); $i++) {
 				if ($i != 15) { // colonne à ne pas afficher : 'RES'
 				echo '<div>';
-				echo '<div class="spaceTop" style="text-align: justify;">' . partis($nomsColonnes[$i]) . '</div>';
-				echo '<div class="indice2" "></div>';
-				// echo '<div class="indice" style="position:relative; left:' . minData($ligne[24+ $AjoutParti + $i]) * 2 . '%;  width:' . (minData(($ligne[46+ $AjoutParti + $i] - $ligne[24+ $AjoutParti + $i]))) * 2 . '%; "></div>';
+				echo '<div class="spaceTop" style="text-align: left;">' . partis($nomsColonnes[$i]) . '</div>';
+				// echo '<div class="indice2" "></div>';
+				echo '<div class="indice" style="position:relative; left:' . minData($ligne[24+ $AjoutParti + $i]) * 2 . '%;  width:' . (minData(($ligne[44+ $AjoutParti + $i] - $ligne[24+ $AjoutParti + $i]))) * 2 . '%; "></div>';
 
 				echo '<div class="barrGraph" style="display: flex;">';
 				echo '<div class="code_' . $nomsColonnes[$i] . ' spaceR" style="width:' . ((minData((int)($ligne[$i]))) * 2) . '%;"></div>

@@ -39,5 +39,7 @@ function partis($tring)
 	$tring = str_replace("LP", "LP - Les Patriotes", $tring);
 	$tring = str_replace("EP", "EP - Ecologie positive", $tring);
 	$tring = str_replace("ND", "ND - Nouvelle Donne", $tring);
+	$tring = str_replace("UDMF", "UDMF - Union des démocrates musulmans français", $tring);
+	
 	return $tring;
 };

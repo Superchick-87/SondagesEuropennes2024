@@ -229,7 +229,7 @@ select option {
 .bigdata2 {
   font-family: Ultra;
   font-size: 1.5em;
-  /* line-height: 0.5em; */
+  line-height: 0.5em;
   color: #40545d;
 }
 .bigdata3 {
@@ -337,6 +337,9 @@ select option {
 }
 .code_LP {
   background-color: #8D2E88;
+}
+.code_UDMF {
+  background-color: #eeeeee;
 }
 
 /* barre graph */
