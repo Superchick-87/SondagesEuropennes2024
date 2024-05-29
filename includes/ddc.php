@@ -21,9 +21,9 @@ function partis($tring)
 	$tring = str_replace("LO", "LO - Lutte ouvrière", $tring);
 	$tring = str_replace("PCF", "PCF - Parti communiste", $tring);
 	$tring = str_replace("LFI", "LFI - France insoumise", $tring);
-	$tring = str_replace("PS", "PS - Parti socialiste", $tring);
+	$tring = str_replace("PS - PP", "PS - Parti socialiste", $tring);
 	$tring = str_replace("EELV", "EELV - Les écologistes", $tring);
-	$tring = str_replace("PRG", "PRG - Parti radical de gauche", $tring);
+	$tring = str_replace("PRG - RPS", "PRG - Parti radical de gauche", $tring);
 	$tring = str_replace("EAC", "EAC - Ecologie au centre", $tring);
 	$tring = str_replace("ENS", "ENS - Ensemble", $tring);
 	$tring = str_replace("AR", "AR - Alliance rurale", $tring);

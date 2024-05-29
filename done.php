@@ -28,7 +28,7 @@ $fichier = fopen($chemin_fichier_csv, 'r');
 echo '<div id="fondSel2" class="sel2">
 <select style="display:block;" class="box" id="choix2" name="choix2" onchange="showCustomer2(this.value);">';
 echo '<option>Comparer les hypothèses</option>';
-$AjoutParti = 1;
+$AjoutParti = -1;
 while (($ligne = fgetcsv($fichier)) !== FALSE) {
 
 	if (($ligne[26+$AjoutParti] != '') && ($dataStart == $ligne[24+$AjoutParti] . ' | ' . $ligne[25+$AjoutParti])) {
@@ -71,7 +71,9 @@ if ($fichier !== false) {
 				if ($i != 15) { // colonne à ne pas afficher : 'RES'
 				echo '<div>';
 				echo '<div class="spaceTop" style="text-align: justify;">' . partis($nomsColonnes[$i]) . '</div>';
-				echo '<div class="indice" style="position:relative; left:' . minData($ligne[24+ $AjoutParti + $i]) * 2 . '%;  width:' . (minData(($ligne[46+ $AjoutParti + $i] - $ligne[24+ $AjoutParti + $i]))) * 2 . '%; "></div>';
+				echo '<div class="indice2" "></div>';
+				// echo '<div class="indice" style="position:relative; left:' . minData($ligne[24+ $AjoutParti + $i]) * 2 . '%;  width:' . (minData(($ligne[46+ $AjoutParti + $i] - $ligne[24+ $AjoutParti + $i]))) * 2 . '%; "></div>';
+
 				echo '<div class="barrGraph" style="display: flex;">';
 				echo '<div class="code_' . $nomsColonnes[$i] . ' spaceR" style="width:' . ((minData((int)($ligne[$i]))) * 2) . '%;"></div>
 					<div class="txtNoWrap bigdata2">' . $ligne[$i] . ' %</div>';
