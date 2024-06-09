@@ -19,6 +19,9 @@ function ddc($tring)
 function partis($tring)
 {
 	$tring = str_replace("LO", "LO - Lutte ouvrière", $tring);
+	/** correspondance précise preg_replace */
+	$tring = preg_replace('/\bNPA\b/', "NPA - Nouveau Parti anticapitaliste", $tring);
+	$tring = preg_replace('/\bPA\b/', "PA - Parti animaliste", $tring);
 	$tring = str_replace("PCF", "PCF - Parti communiste", $tring);
 	$tring = str_replace("LFI", "LFI - France insoumise", $tring);
 	$tring = str_replace("PS - PP", "PS - Parti socialiste", $tring);
@@ -32,7 +35,6 @@ function partis($tring)
 	$tring = str_replace("DLF", "DLF - Debout la France", $tring);
 	$tring = str_replace("RN", "RN - Rassemblement national", $tring);
 	$tring = str_replace("REC", "REC - Reconquête", $tring);
-	$tring = str_replace("PA", "PA - Parti animaliste", $tring);
 	$tring = str_replace("Autres", "Autres", $tring);
 	$tring = str_replace("UPR", "UPR - Union populaire républicaine", $tring);
 	$tring = str_replace("RES", "RES - Résistons", $tring);
